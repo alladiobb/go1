@@ -1,6 +1,6 @@
 package main
 
-const a = "constante"
+// const a = "constante"
 
 var b bool
 var c int
@@ -13,8 +13,8 @@ var (
 
 func main() {
 	var a string = "b"
-	b = true
-	println(d)
+	b = a
+	println(a)
 }
 
 func main2() {

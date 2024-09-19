@@ -8,6 +8,9 @@ import (
 	"os"
 )
 
+// json to struct GoLang
+// https://mholt.github.io/json-to-go/
+
 type ViaCEP struct {
 	Cep         string `json:"cep"`
 	Logradouro  string `json:"logradouro"`

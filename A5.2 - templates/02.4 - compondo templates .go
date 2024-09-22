@@ -14,8 +14,14 @@ type Cursos []Curso
 
 func main() {
 
+	templates := []string{
+		"./html/compondo/header.html",
+		"./html/compondo/content.html",
+		"./html/compondo/footer.html",
+	}
+
 	http.HandleFunc("/", func(rw http.ResponseWriter, r *http.Request) {
-		t := template.Must(template.New("template.html").ParseFiles("./html/template.html"))
+		t := template.Must(template.New("content.html").ParseFiles(templates...))
 		error := t.Execute(rw, Cursos{
 			{"Go", 40},
 			{"Java", 20},

@@ -12,7 +12,7 @@ func main() {
 	// ctxt := context.Background()
 	ctxt, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
-	request, error := http.NewRequestWithContext(ctxt, "GET", "http://localhost:8080", nil)
+	request, error := http.NewRequestWithContext(ctxt, "GET", "http://localhost:8082", nil)
 	if error != nil {
 		panic(error)
 	}

@@ -22,12 +22,30 @@ func NewProduct(name string, price float64) *Product {
 }
 
 func main() {
-
 	db, error := sql.Open("mysql", "root:root@tcp(localhost:3306)/golang")
 	if error != nil {
 		panic(error)
 	}
-
 	defer db.Close()
+
+	product := NewProduct("mouse", 49.99)
+	error = insertProduct(db, product)
+	if error != nil {
+		panic(error)
+	}
+}
+
+func insertProduct(db *sql.DB, product *Product) error {
+	stmt, error := db.Prepare("insert into products(id, name, price) values(?,?,?)")
+	if error != nil {
+		panic(error)
+	}
+	defer stmt.Close()
+
+	_, error = stmt.Exec(product.ID, product.Name, product.Price)
+	if error != nil {
+		panic(error)
+	}
+	return nil
 
 }

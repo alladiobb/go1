@@ -14,3 +14,7 @@ docker compose exec mysql bash
 mysql -uroot -p golang
 ```
 
+```
+go mod init
+go mod tidy
+```

@@ -64,3 +64,21 @@ func insertProduct(db *sql.DB, product *Product) error {
 	}
 	return nil
 }
+
+func selectOneProduct(db *sql.DB, id string) (*Product, error) {
+	stmt, error := db.Prepare("select id, name, price from products where id = ?")
+
+	if error != nil {
+		return nil, error
+	}
+
+	defer stmt.Close()
+	var product Product
+	error = stmt.QueryRow(id).Scan(&product.ID, &product.Name, &product.Price)
+	if error != nil {
+		return nil, error
+	}
+
+	return &product, nil
+
+}

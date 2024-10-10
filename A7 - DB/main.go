@@ -28,11 +28,27 @@ func main() {
 	}
 	defer db.Close()
 
-	product := NewProduct("mouse", 49.99)
-	error = insertProduct(db, product)
+	product := NewProduct("Mouse", 49.99)
+	product.Price = 100.99
+	product.ID = "868e6d34-dcb9-454d-9e02-d97282b7ec5e"
+	error = updateProduct(db, product)
 	if error != nil {
 		panic(error)
 	}
+}
+
+func updateProduct(db *sql.DB, product *Product) error {
+	stmt, error := db.Prepare("update  products set name = ? , price = ? where id = ?")
+	if error != nil {
+		panic(error)
+	}
+	defer stmt.Close()
+
+	_, error = stmt.Exec(product.Name, product.Price, product.ID)
+	if error != nil {
+		panic(error)
+	}
+	return nil
 }
 
 func insertProduct(db *sql.DB, product *Product) error {
@@ -47,5 +63,4 @@ func insertProduct(db *sql.DB, product *Product) error {
 		panic(error)
 	}
 	return nil
-
 }

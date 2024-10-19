@@ -47,6 +47,17 @@ func main() {
 	var product2 Product2
 	db.First(&product2, "name = ?", "notebook3")
 	fmt.Println(product2)
+
+	//Select vários produtos
+	var products []Product2
+	db.Find(&products)
+
+	for _, product := range products {
+		fmt.Println(product)
+	}
+
+	//Select por variavel
+	var product3 Product2
 }
 
 func selectProduct() {
